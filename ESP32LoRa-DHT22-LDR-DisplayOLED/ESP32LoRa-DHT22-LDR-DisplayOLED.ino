@@ -24,7 +24,7 @@ char pass[] = "RodrigoValRobson2021"; // Enter Your Passwword
 BlynkTimer timer;
 
 DHTesp dht;
-int LDR = 37;
+int LDR = 21;
  
 float currentTemp;
 float currentHumidity;
@@ -50,7 +50,7 @@ void displayReadingsOnOled() {
     
 void setup()
 {
-  dht.setup(36, DHTesp::DHT11);
+  dht.setup(22, DHTesp::DHT11);
    
   currentTemp = dht.getTemperature();
   currentHumidity = dht.getHumidity();
