@@ -1,0 +1,9 @@
+{
+  "DHT22_Data": {
+    "Humidity": "",
+    "Temperature": 0
+  },
+  "LED_Data": {
+    "LED_01": 0
+  }
+}

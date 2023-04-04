@@ -1,0 +1,16 @@
+{
+    "configuration": "PSRAM=disabled,CPUFreq=240,UploadSpeed=921600,DebugLevel=none,LORAWAN_REGION=0,LoRaWanDebugLevel=0,EraseFlash=none",
+    "board": "esp32:esp32:heltec_wifi_lora_32_V2",
+    "port": "COM3",
+    "sketch": "ESP32-LoRa-SensorPIR.ino",
+    "output": "D:\\GitRepositorio\\build\\ESP32-LoRa",
+    "programmer": "AVRISP mkII",
+    "port": "COM3",
+    "baudRate": 115200,
+    "flashFreq": "80m",
+    "flashMode": "dio",
+    "partitionScheme": "default",
+    "uploadSpeed": 921600,
+    "debugger": "J-Link",
+    "extraFlags": ""
+}
