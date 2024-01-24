@@ -142,7 +142,7 @@ void setup () {
   ArduinoOTA.setPort(3232);
 
   // Hostname defaults to esp3232-[MAC]
-  ArduinoOTA.setHostname("esp32-lora");
+  ArduinoOTA.setHostname("ESP32-LoRa");
 
   // No authentication by default
   ArduinoOTA.setPassword("loboalfa");
