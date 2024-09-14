@@ -52,10 +52,9 @@ public:
 
 MyBroker broker;
 
-void setup()
+// Função para configurar o Access Point (Roteador AP)
+void setupAP(void *parameter)
 {
-    Serial.begin(115200);
-
     // Configurar IP estático no modo AP
     IPAddress local_IP(192,168,10,1);    // Define o IP que você deseja usar
     IPAddress gateway(192,168,10,1);     // Gateway, normalmente o mesmo do IP do AP
@@ -73,14 +72,47 @@ void setup()
     Serial.print("Endereço IP do AP: ");
     Serial.println(IP);
 
+    vTaskDelete(NULL); // Deleta a tarefa após completar a configuração do AP
+}
+
+// Função para configurar o Broker MQTT
+void setupMQTT(void *parameter)
+{
     const unsigned short mqttPort = 1883;
     broker.init(mqttPort);
 
-    // Código adicional, se necessário
+    while (true)
+    {
+        broker.update(); // Mantém o broker rodando
+        vTaskDelay(10 / portTICK_PERIOD_MS); // Evita o watchdog timeout
+    }
+}
+
+void setup()
+{
+    Serial.begin(115200);
+
+    // Criar tarefas para os dois núcleos
+    xTaskCreatePinnedToCore(
+        setupAP,      // Função para o Access Point
+        "TaskAP",     // Nome da tarefa
+        4096,         // Tamanho da pilha
+        NULL,         // Parâmetro da tarefa
+        1,            // Prioridade da tarefa
+        NULL,         // Handle da tarefa
+        0);           // Pinned to Core 0 (AP rodará no Core 0)
+
+    xTaskCreatePinnedToCore(
+        setupMQTT,    // Função para o Broker MQTT
+        "TaskMQTT",   // Nome da tarefa
+        4096,         // Tamanho da pilha
+        NULL,         // Parâmetro da tarefa
+        1,            // Prioridade da tarefa
+        NULL,         // Handle da tarefa
+        1);           // Pinned to Core 1 (MQTT rodará no Core 1)
 }
 
 void loop()
 {
-    broker.update();
-    // Código adicional, se necessário
+    // O loop principal pode estar vazio, pois as tarefas independentes lidam com o AP e o Broker MQTT.
 }
