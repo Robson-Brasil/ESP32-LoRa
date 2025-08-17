@@ -2,7 +2,7 @@
 #include <sMQTTBroker.h>
 
 // Configurações do ponto de acesso
-const char* ssid = "Roteador e MQTT Broker";
+const char* ssid = "Roteador";
 const char* password = "S3nh@S3gur@";
 
 // Configurações de rede
